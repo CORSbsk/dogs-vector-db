@@ -3,4 +3,42 @@ docker compose version
 git --version
 docker compose up -d
 docker ps
+
+// Entrar a postgres
 docker exec -it dogs-vector-db psql -U postgres -d dogs
+
+CREATE EXTENSION IF NOT EXISTS vector;
+
+// Ahora crearemos nuestra tabla. Para CLIP ViT-B-32, utilizaremos vectores de 512 dimensiones:
+
+CREATE TABLE dogs (
+    id SERIAL PRIMARY KEY,
+    breed TEXT NOT NULL,
+    filename TEXT NOT NULL,
+    image_path TEXT NOT NULL,
+    embedding VECTOR(512)
+);
+
+// Entra al entorno virtual de python
+.venv\Scripts\Activate.ps1
+
+// Conexion exitosa
+
+      Docker
+        │
+        ▼
+PostgreSQL 16
+        │
+        ▼
+    pgvector
+        │
+        ▼
+┌───────────────┐
+│     dogs      │
+├───────────────┤
+│ id            │
+│ breed         │
+│ filename      │
+│ image_path    │
+│ embedding     │
+└───────────────┘
