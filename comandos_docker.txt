@@ -1,0 +1,6 @@
+docker --version
+docker compose version
+git --version
+docker compose up -d
+docker ps
+docker exec -it dogs-vector-db psql -U postgres -d dogs
